@@ -1,6 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 
+and [TypeScript](https://www.typescriptlang.org/), 
+[TailwindCSS](https://tailwindcss.com/) for the styling and [Prisma](https://www.prisma.io/)
+as database ORM.
 
 ## Getting Started
+The setup for this project: 
+  ### The automatic Next setup with --typescript flag:
+    ```bash
+    pnpm create next-app -- --typescript
+    ```
+  ### The setup of <a href="https://tailwindcss.com/docs/guides/nextjs"> tailwind docs for nextjs</a>:
+    ```bash
+    pnpm install -D tailwindcss postcss autoprefixer
+    pnpm exec tailwindcss init -p
+    ```
+    Configure the tailwind.config.js and add the tailwind directives
+    as instructed in the tailwind docs
+
 First, clone this repository:
 
 ```git clone ```
