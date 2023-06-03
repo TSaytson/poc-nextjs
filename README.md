@@ -7,19 +7,15 @@ as database ORM.
 The setup for this project: 
   #### The automatic Next setup with --typescript flag:
 
-    ```bash 
     pnpm create next-app -- --typescript
-    ```
-    
+
   #### The setup of <a href="https://tailwindcss.com/docs/guides/nextjs"> tailwind docs for nextjs</a>:
 
-    ```bash 
     pnpm install -D tailwindcss postcss autoprefixer
     pnpm exec tailwindcss init -p
-    ```
 
-    Configure the tailwind.config.js and add the tailwind directives
-    as instructed in the tailwind docs
+  Configure the tailwind.config.js and add the tailwind directives
+  as instructed in the tailwind docs
 
 First, clone this repository:
 
