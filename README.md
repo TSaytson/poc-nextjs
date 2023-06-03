@@ -20,8 +20,10 @@ as database ORM.
 ### To run this project:
 First, clone this repository:
 
-```git clone https://github.com/TSaytson/poc-nextjs```
-```git remote rm origin```
+```bash 
+git clone https://github.com/TSaytson/poc-nextjs
+git remote rm origin
+```
 Add your remote repository
 
 Second, install the dependencies:
