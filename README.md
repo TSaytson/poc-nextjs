@@ -58,12 +58,24 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about Next.js:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+To learn more about Tailwind:
+
+- [TailwindCSS Documentation](https://tailwindcss.com/docs/installation) - Get started with Tailwind CSS
+
+To learn more about Typescript:
+
+- [Typescript Documentation](https://www.typescriptlang.org/docs/) - Typescript Documentation
+
+To learn more about Prisma:
+
+- [Prisma Documentation](https://www.prisma.io/docs) - Prisma Docs
 
 ## Deploy on Vercel
 
