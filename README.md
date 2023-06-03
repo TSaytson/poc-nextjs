@@ -4,7 +4,7 @@ and [TypeScript](https://www.typescriptlang.org/),
 as database ORM.
 
 ## Getting Started
-The setup for this project: 
+### The setup for this project: 
   #### The automatic Next setup with --typescript flag:
 
     pnpm create next-app -- --typescript
@@ -17,6 +17,7 @@ The setup for this project:
   Configure the tailwind.config.js and add the tailwind directives
   as instructed in the tailwind docs
 
+### To run this project:
 First, clone this repository:
 
 ```git clone ```
