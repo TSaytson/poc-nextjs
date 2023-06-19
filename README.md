@@ -17,6 +17,12 @@ as database ORM.
   Configure the tailwind.config.js and add the tailwind directives
   as instructed in the tailwind docs
 
+  #### Adding prisma to the project:
+    pnpm install -D prisma
+    pnpm dlx prisma init
+
+  Follow the instructions on the terminal
+
 ### To run this project:
 First, clone this repository:
 
@@ -36,7 +42,8 @@ yarn install
 pnpm install
 ```
 
-And then, run the development server:
+Configure your environment variables
+And then run the development server:
 
 ```bash
 npm run dev
