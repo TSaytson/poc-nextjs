@@ -1,23 +1,61 @@
+import { prisma } from "@/config/database";
+import { Finding } from "@prisma/client";
 import axios from "axios";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import swal from "sweetalert";
-import Layout from "../../../layouts/Layout";
+import Layout from "../../../../layouts/Layout";
 
-export default function CreateResource() {
-  const [form, setForm] = useState({
-    title: '',
-    description: '',
-    imageUrl: '' as string | ArrayBuffer | null,
-    link: ''
+type StaticProps = {
+  finding: Finding;
+}
+
+type StaticParams = {
+  id: string;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const findings = await prisma.finding.findMany({
+    select: { id: true }
   });
 
+  return {
+    paths: findings.map(({ id }) => (
+      {params: {id}}
+    )),
+    fallback: true
+  }
+}
+
+export const getStaticProps: GetStaticProps<StaticProps, StaticParams> = async ({params}) => {
+  const finding = await prisma.finding.findUnique({
+    where: { id: params?.id }
+  });
+
+  return {
+    props: {
+      finding: JSON.parse(JSON.stringify(finding))
+    }
+  }
+}
+
+const UpdateResource: NextPage<StaticProps> = ({ finding }) => {
+ 
+  const [form, setForm] = useState({
+    title: finding.title,
+    description: finding.description,
+    imageUrl: finding.imageUrl as string | ArrayBuffer | null,
+    link: finding.link
+  });
+  
   async function handleForm(e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) {
     const file = e.target.files?.item(0);
     const reader = new FileReader();
-    
+
     if (file?.type.match('image.*')) {
       reader.addEventListener("load", () => {
-        setForm({ ...form, imageUrl: reader.result})
+        setForm({ ...form, imageUrl: reader.result })
       })
       reader.readAsDataURL(file);
     };
@@ -25,17 +63,18 @@ export default function CreateResource() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function addFinding(e:React.FormEvent) {
+  async function updateFinding(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/findings', form);
+      const response = await axios.put(`/api/findings/${finding.id}`, form);
       swal({
         title: 'Sucesso!',
         text: response.data.message,
         icon: 'success',
         timer: 1500
       })
-    } catch (error:any) {
+    } catch (error: any) {
+      console.log(error);
       swal({
         title: 'Erro!',
         text: error.response.data.message,
@@ -44,9 +83,10 @@ export default function CreateResource() {
       })
     }
   }
+
   return (
     <Layout>
-      <form onSubmit={addFinding} className="max-w-screen-lg mx-auto flex flex-col px-4">
+      <form onSubmit={updateFinding} className="max-w-screen-lg mx-auto flex flex-col px-4">
         <h1 className="text-2xl font-bold mb-2">
           Share a finding
         </h1>
@@ -62,7 +102,7 @@ export default function CreateResource() {
             type='file'
             onChange={handleForm}
             id='image'
-            className="w-full border-[1px] h-12 rounded-lg shadow-sm p-2 outline-none 
+            className="w-full border-[1px] h-32 rounded-lg shadow-sm p-2 outline-none 
             focus:outline-gray-400 focus:outline-[3px] transition-all"
           />
         </div>
@@ -109,9 +149,11 @@ export default function CreateResource() {
         </div>
         <button className="px-6 py-3 bg-sky-700 text-white rounded-lg ml-auto outline-none
         focus:outline-offset-0 focus:outline-sky-300 focus:outline-[3px] transition-all">
-          Add finding
+          Update
         </button>
       </form>
     </Layout>
   )
 }
+
+export default UpdateResource;

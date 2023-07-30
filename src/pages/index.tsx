@@ -1,12 +1,8 @@
-import Head from 'next/head'
-import Logo from '@/components/Logo'
-import Image from 'next/image'
 import CategoryLink from '@/components/Category';
 import { prisma } from '@/config/database';
-import ResourcesGrid from '@/components/FindingsGrid';
 import { Finding } from '@prisma/client';
-import Header from '../../layouts/Header';
 import Layout from '../../layouts/Layout';
+import FindingsGrid from '@/components/FindingsGrid';
 
 export async function getServerSideProps() {
   const findings = await prisma.finding.findMany();
@@ -54,7 +50,7 @@ export default function Home({findings = []}:Props) {
             All resources
           </h1>
 
-          <ResourcesGrid findings={findings}/>
+          <FindingsGrid findings={findings}/>
           
         </div>
 

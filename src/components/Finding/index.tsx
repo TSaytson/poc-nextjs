@@ -1,14 +1,13 @@
 import { Finding as FindingModel } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 
-type FindingComponentProps = Omit<FindingModel, 'createdAt' | 'updatedAt'> & {
-  link: string,
-  imageUrl: string
-}
+type FindingComponentProps = Omit<FindingModel, 'createdAt' | 'updatedAt'>
+
 export default function Finding(
-  { title, description, imageUrl, link }: FindingComponentProps) {
+  {id, title, description, imageUrl }: FindingComponentProps) {
   return (
-    <a href={link}>
+    <Link href={`/findings/${id}`}>
       <div className='flex flex-col gap-2 max-w-xs'>
         <div className="w-full">
           <Image
@@ -24,6 +23,6 @@ export default function Finding(
           {description}
         </p>
       </div>
-    </a>
+    </Link>
   )
 }

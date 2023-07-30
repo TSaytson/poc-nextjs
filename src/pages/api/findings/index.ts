@@ -14,23 +14,23 @@ export default async function handler(
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST'])
     return res.status(405).
-      json({ message: `HTTP method ${req.method} is not allowed` })
+      send({ message: `HTTP method ${req.method} is not allowed` })
   }
 
   const data = req.body as Omit<Finding, 'id' | 'createdAt' | 'updatedAt'>;
 
-  if (!data.title || !data.description) {
-    return res.status(422).json({
-      message: 'Title and description are required'
+  if (!data.title || !data.description || !data.imageUrl) {
+    return res.status(422).send({
+      message: 'Title, description and image url are required'
     })
   }
   
-  const { title, description } = data;
+  const { title, description, imageUrl, link } = data;
   try {
-    await prisma.finding.create({ data: { title, description } })
-    return res.status(201).json({ message: 'created'});
+    await prisma.finding.create({ data: {title, description, imageUrl, link}})
+    return res.status(201).send({ message: 'created'});
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: 'error' });
+    return res.status(500).send({ message: 'error' });
   }
 }
